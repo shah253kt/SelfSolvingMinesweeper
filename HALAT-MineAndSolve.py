@@ -2,6 +2,7 @@
    
     
 from tkinter import *
+import tkinter.font as font
 import random
 import math
 import time
@@ -9,9 +10,10 @@ import time
 root = Tk()
 
 btn = [] #Array storing all the buttons
-numOfBombs = 400 #Number of bombs
-numOfRows = 38 #Number of rows
-numOfCols = 56 #Number of columns
+numOfRows = 25 #Number of rows
+numOfCols = 40 #Number of columns
+bombsPercentage = 0.25 #Percentage of bombs in relation to tiles count
+numOfBombs = (int) ((numOfRows * numOfCols) * bombsPercentage) #Number of bombs
 
 initialPause = 2000
 waitTime = 100
@@ -614,7 +616,10 @@ def my_fun(x,y,index):
 #Loop which creates all the tiles
 for i in range(numOfRows):
 	for j in range(numOfCols):
-		btn.append(Button(root, width=2, height=1, font='Terminal'))
+		emojiFont = font.Font(family='Segoe UI Emoji')
+		button = Button(root, width=3, height=1)
+		button['font'] = emojiFont
+		btn.append(button)
 		btn[btnNumber].grid(row=i,column=j)
 		btnNumber = btnNumber + 1
 

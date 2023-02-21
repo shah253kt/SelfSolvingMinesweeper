@@ -3,14 +3,16 @@
 #
     
 from tkinter import *
+import tkinter.font as font
 import random
 
 root = Tk()
 
 btn = [] #Array storing all the buttons
-numOfBombs = 400 #Number of bombs
-numOfRows = 38 #Number of rows
-numOfCols = 56 #Number of columns
+numOfRows = 25 #Number of rows
+numOfCols = 40 #Number of columns
+bombsPercentage = 0.25 #Percentage of bombs in relation to tiles count
+numOfBombs = (int) ((numOfRows * numOfCols) * bombsPercentage) #Number of bombs
 
 StartRow = 12
 StartCol = 10
@@ -212,7 +214,10 @@ def my_fun(event,x,y,index):
 #Loop which creates all the tiles
 for i in range(numOfRows):
 	for j in range(numOfCols):
-		btn.append(Button(root, width=2, height=1, font='Terminal'))
+		emojiFont = font.Font(family='Segoe UI Emoji')
+		button = Button(root, width=3, height=1)
+		button['font'] = emojiFont
+		btn.append(button)
 		btn[btnNumber].bind('<Double-Button-1>', lambda event, x=j,y=i,index=btnNumber:my_fun(event,x,y,index))
 		btn[btnNumber].bind('<Button-1>', lambda event, x=j,y=i,index=btnNumber:ChordClick(event,x,y,index))
 		btn[btnNumber].bind('<Button-3>', lambda event, x=j,y=i,index=btnNumber:FlagClick(event,x,y,index))
